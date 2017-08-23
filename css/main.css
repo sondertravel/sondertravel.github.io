@@ -1,0 +1,91 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+
+body {
+    font-family: 'Josefin Sans';
+    padding-bottom: 20px;
+    background-color: #e1eaea;
+}
+
+.nav {
+	float: right;
+}
+
+.definition {
+	color:#00b8e6;
+}
+
+#definition {
+  background-color: #cceeff; 
+  padding: 70px 0 70px;
+  color: #white;
+  background-size: cover;
+}
+
+#mapdiv {
+  border-radius: 15px;
+}
+
+.amcharts-main-div a {
+  display: none !important;
+}
+
+.journalpic {
+  float: center;
+  padding: 30px;
+}
+
+.transparent{
+    background: rgba(255, 255, 255, 0.0);
+}
+
+.navbar-inverse {
+  background-color: rgba(255, 255, 255, 0.0);
+  border-color: rgba(255, 255, 255, 0.0);
+  z-index: 10;
+  width: 100%;
+  position:absolute;
+  top:0;
+  left:0;
+  padding-top: 20px;
+}
+
+.navbar-brand {
+  font-size: 76px;
+}
+
+blockquote {
+  font-size: 26px;
+}
+
+.navbar {
+  padding-bottom: 26px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

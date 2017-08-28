@@ -1,337 +1,289 @@
-@import 'bourbon'; // http://bourbon.io/
+$primary: #3F51B5;
+$dark-primary: #303F9F;
+$light-primary: #C5CAE9;
+$text: #FFFFFF;
+$primary-text: #212121;
+$secondary-text: #757575;
+$accent: #FF4081;
 
-@import '../partials/variables'; // colors, fonts etc...
-
-@import '../partials/mixins'; // custom mixins
-
-@import '../partials/layout'; // responsive grid and media queries
-
-/* -------------------------------- 
-
-Primary style
-
--------------------------------- */
-
-*, *::after, *::before {
-	box-sizing: border-box;
+section {
+  padding: 100px 0;
 }
 
-html {
-	font-size: 62.5%;
+html, body {
+  overflow-x: hidden;
 }
 
 body {
-	font: {
-		size: 1.6rem;
-		family: $primary-font; // variables inside partials > _variables.scss
+  font-family: 'Roboto';
+  font-size: 17px;
+  font-weight: 400;
+  background-color: #eee;
+}
+
+h1 {
+  font-size: 200%;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 400;
+}
+
+header {
+	background: $primary;
+	color: $text;
+	padding: 150px 0;
+
+	p {
+		font-family: 'Allura';
+		color: rgba(255, 255, 255, .2);
+		margin-bottom: 0;
+		font-size: 60px;
+		margin-top: -30px;
+
 	}
-	color: $color-1;
-	background-color: $color-4;
+}
+
+.timeline {
+
+	position: relative;
+
+	&::before {
+		content: '';
+		background: $light-primary;
+		width: 5px;
+		height: 95%;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+
+.timeline-item {
+	width: 100%;
+	margin-bottom: 70px;
+
+	&:nth-child(even) {
+
+		.timeline-content {
+			float: right;
+			padding: 40px 30px 10px 30px;
+
+			.date {
+				right: auto;
+				left: 0;
+			}
+
+			&::after {
+				content: '';
+				position: absolute;
+				border-style: solid;
+				width: 0;
+				height: 0;
+				top: 30px;
+				left: -15px;
+				border-width: 10px 15px 10px 0;
+				border-color: transparent #f5f5f5 transparent transparent;
+			}
+		}
+	}
+
+	&::after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+}
+
+
+.timeline-content {
+	position: relative;
+	width: 45%;
+	padding: 10px 30px;
+	border-radius: 4px;
+	background: #f5f5f5;
+	box-shadow: 0 20px 25px -15px rgba(0, 0, 0, .3);
+
+	&::after {
+		content: '';
+		position: absolute;
+		border-style: solid;
+		width: 0;
+		height: 0;
+		top: 30px;
+		right: -15px;
+		border-width: 10px 0 10px 15px;
+		border-color: transparent transparent transparent #f5f5f5;
+	}
+}
+
+.timeline-img {
+	width: 30px;
+	height: 30px;
+	background: $primary;
+	border-radius: 50%;
+	position: absolute;
+	left: 50%;
+	margin-top: 25px;
+	margin-left: -15px;
 }
 
 a {
-	color: $color-2;
-	text-decoration: none;
+	background: $primary;
+	color: $text;
+	padding: 8px 20px;
+	text-transform: uppercase;
+	font-size: 14px;
+	margin-bottom: 20px;
+	margin-top: 10px;
+	display: inline-block;
+	border-radius: 2px;
+	box-shadow: 0 1px 3px -1px rgba(0, 0, 0, .6);
+
+	&:hover, &:active, &:focus {
+		background: darken($primary, 10%);
+		color: $text;
+		text-decoration: none;
+	}
+
 }
 
-/* -------------------------------- 
-
-Main Components 
-
--------------------------------- */
-
-.cd-horizontal-timeline {
-	opacity: 0;
-	margin: 2em auto;
-	@include transition(opacity .2s);
-
-	&::before {
-		/* never visible - this is used in jQuery to check the current MQ */
-		content: 'mobile';
-		display: none;
-	}
-
-	&.loaded {
-		/* show the timeline after events position has been set (using JavaScript) */
-		opacity: 1;
-	}
-
-	.timeline {
-		position: relative;
-		height: 100px;
-		width: 90%;
-		max-width: 800px;
-		margin: 0 auto;
-	}
-
-	.events-wrapper {
-		position: relative;
-		height: 100%;
-		margin: 0 40px;
-		overflow: hidden;
-
-		&::after, &::before {
-			/* these are used to create a shadow effect at the sides of the timeline */
-			content: '';
-			position: absolute;
-			z-index: 2;
-			top: 0;
-			height: 100%;
-			width: 20px;
-		}
-
-		&::before {
-			left: 0;
-	    	@include background-image(linear-gradient(to right,$color-4, rgba($color-4, 0)));
-		}
-
-		&::after {
-			right: 0;
-			@include background-image(linear-gradient(to left,$color-4, rgba($color-4, 0)));
-		}
-	}
-
-	.events {
-		/* this is the grey line/timeline */
-		position: absolute;
-		z-index: 1;
-		left: 0;
-		top: 49px;
-		height: 2px;
-		/* width will be set using JavaScript */
-		background: darken($color-4, 10%);
-		@include transition(transform .4s);
-	}
-
-	.filling-line {
-		/* this is used to create the green line filling the timeline */
-		position: absolute;
-		z-index: 1;
-		left: 0;
-		top: 0;
-		height: 100%;
-		width: 100%;
-		background-color: $color-2;
-		@include transform(scaleX(0));
-		@include transform-origin(left center);
-		@include transition(transform .3s);
-	}
-
-	.events a {
-		position: absolute;
-		bottom: 0;
-		z-index: 2;
-		text-align: center;
-		font-size: 1.3rem;
-		padding-bottom: 15px;
-		color: $color-1;
-		/* fix bug on Safari - text flickering while timeline translates */
-		@include transform(translateZ(0));
-
-		&::after {
-			/* this is used to create the event spot */
-			content: '';
-			position: absolute;
-			@include center(x);
-			bottom: -5px;
-			height: 12px;
-			width: 12px;
-			border-radius: 50%;
-			border: 2px solid darken($color-4, 10%);
-			background-color: $color-4;
-			@include transition(background-color .3s, border-color .3s);
-		}
-
-		.no-touch &:hover::after {
-			background-color: $color-2;
-			border-color: $color-2;
-		}
-
-		&.selected {
-			pointer-events: none;
-
-			&::after {
-				background-color: $color-2;
-				border-color: $color-2;
-			}
-		}
-
-		&.older-event::after {
-			border-color: $color-2;
-		}
-	}
-
-	@include MQ(L) {
-		margin: 6em auto;
-		
-		&::before {
-			/* never visible - this is used in jQuery to check the current MQ */
-			content: 'desktop';
-		}
-	}
-}
-
-.cd-timeline-navigation a {
-	/* these are the left/right arrows to navigate the timeline */
-	position: absolute;
-	z-index: 1;
-	@include center(y);
-	height: 34px;
-	width: 34px;
-	border-radius: 50%;
-	border: 2px solid darken($color-4, 10%);
-	/* replace text with an icon */
-	overflow: hidden;
-	color: transparent;
-	text-indent: 100%;
-	white-space: nowrap;
-	@include transition(border-color .3s);
-	
-	&::after {
-		/* arrow icon */
-		content: '';
-		position: absolute;
-		height: 16px;
-		width: 16px;
-		@include center;
-		background: url(../img/cd-arrow.svg) no-repeat 0 0;
-	}
-
-	&.prev {
-		left: 0;
-		@include transform(translateY(-50%) rotate(180deg));
-	}
-
-	&.next {
-		right: 0;
-	}
-
-	.no-touch &:hover {
-		border-color: $color-2;
-	}
-
-	&.inactive {
-		cursor: not-allowed;
-
-		&::after {
-			background-position: 0 -16px;
-		}
-
-		.no-touch &:hover {
-			border-color: darken($color-4, 10%);
-		}
-	}
-}
-
-.cd-horizontal-timeline .events-content {
-	position: relative;
-	width: 100%;
-	margin: 2em 0;
-	overflow: hidden;
-	@include transition(height .4s);
-
-	li {
-		position: absolute;
-		z-index: 1;
-		width: 100%;
-		left: 0;
-		top: 0;
-		@include transform(translateX(-100%));
-		padding: 0 5%;
-		opacity: 0;
-		@include animation-duration(.4s);
-		@include animation-timing-function(ease-in-out);
-
-		&.selected {
-			/* visible event content */
-			position: relative;
-			z-index: 2;
-			opacity: 1;
-			@include transform(translateX(0));
-		}
-
-		&.enter-right, &.leave-right {
-			@include animation-name(cd-enter-right);
-		}
-
-		&.enter-left,  &.leave-left {
-			@include animation-name(cd-enter-left);
-		}
-		
-		&.leave-right, &.leave-left {
-			@include animation-direction(reverse);
-		}
-	}
-	
-	li > * {
-		max-width: 800px;
-		margin: 0 auto;
-	}
-
-	h2 {
-		font-weight: bold;
-		font-size: 2.6rem;
-		font-family: $secondary-font;
-		font-weight: 700;
-		line-height: 1.2;
-	}
-
-	em {
-		display: block;
-		font-style: italic;
-		margin: 10px auto;
-
-		&::before {
-			content: '- ';
-		}
-	}
+.timeline-card {
+	padding: 0!important;
 
 	p {
-		font-size: 1.4rem;
-		color: shade($color-4, 40%);
+		padding: 0 20px;
 	}
 
-	em, p {
-		line-height: 1.6;
+	a {
+		margin-left: 20px;
+	}
+}
+
+.timeline-item {
+
+	&:nth-child(2) {
+		.timeline-img-header {
+			background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0, .4)), url('https://hd.unsplash.com/photo-1458530970867-aaa3700e966d') center center no-repeat;
+			background-size: cover;
+		}
 	}
 
-	@include MQ(M) {
+	&:nth-child(5) {
+		.timeline-img-header {
+			background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0, .4)), url('https://hd.unsplash.com/photo-1444093826349-9ce8c622f4f3') center center no-repeat;
+			background-size: cover;
+		}
+	}
 
-		h2 {
-			font-size: 7rem;
+	&:nth-child(6) {
+		.timeline-img-header {
+			background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0, .4)), url('https://hd.unsplash.com/photo-1471479917193-f00955256257') center center no-repeat;
+			background-size: cover;
+		}
+	}
+
+	&:nth-child(8) {
+		.timeline-img-header {
+			background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0, .4)), url('https://hd.unsplash.com/photo-1466840787022-48e0ec048c8a') center center no-repeat;
+			background-size: cover;
+		}
+	}
+
+	&:nth-child(10) {
+		.timeline-img-header {
+			background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0, .4)), url('https://hd.unsplash.com/photo-1447639703758-f525f36456bf') center center no-repeat;
+			background-size: cover;
+		}
+	}
+
+	&:nth-child(11) {
+		.timeline-img-header {
+			background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0, .4)), url('https://hd.unsplash.com/photo-1469429978400-082eec725ad5') center center no-repeat;
+			background-size: cover;
+		}
+	}
+}
+
+.timeline-img-header {
+
+	height: 200px;
+	position: relative;
+	margin-bottom: 20px;
+
+	h2 {
+		color: $text;
+		position: absolute;
+		bottom: 5px;
+		left: 20px;
+	}
+}
+
+blockquote {
+	margin-top: 30px;
+	color: $secondary-text;
+	border-left-color: $primary;
+	padding: 0 20px;
+}
+
+.date {
+	background: $accent;
+	display: inline-block;
+	color: $text;
+	padding: 10px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+@media screen and (max-width: 768px) {
+
+	.timeline {
+
+		&::before {
+			left: 50px;
 		}
 
-		em {
-			font-size: 2rem;
+		.timeline-img {
+			left: 50px;
 		}
 
-		p {
-			font-size: 1.8rem;
+		.timeline-content {
+			max-width: 100%;
+			width: auto;
+			margin-left: 70px;
+		}
+
+		.timeline-item {
+
+			&:nth-child(even) {
+
+				.timeline-content {
+					float: none;
+
+				}
+			}
+
+			&:nth-child(odd) {
+
+				.timeline-content {
+					
+					&::after {
+						content: '';
+						position: absolute;
+						border-style: solid;
+						width: 0;
+						height: 0;
+						top: 30px;
+						left: -15px;
+						border-width: 10px 15px 10px 0;
+						border-color: transparent #f5f5f5 transparent transparent;
+					}
+				}
+
+			}
 		}
 	}
 	
 }
 
-@include keyframes(cd-enter-right) {
-	0% {
-		opacity: 0;
-		@include transform(translateX(100%));
-	}
 
-	100% {
-		opacity: 1;
-		@include transform(translateX(0%));
-	}
-}
-
-@include keyframes(cd-enter-left) {
-	0% {
-		opacity: 0;
-		@include transform(translateX(-100%));
-	}
-
-	100% {
-		opacity: 1;
-		@include transform(translateX(0%));
-	}
-}

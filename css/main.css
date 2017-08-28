@@ -4,6 +4,29 @@
    Author's custom styles
    ========================================================================== */
 
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+.alignright {
+  float: right;
+  padding: 0 0 10px 10px; /* note the padding around a right floated image */
+}
+
+.alignleft {
+  float: left;
+  padding: 0 10px 10px 0; /* note the padding around a left floated image */
+}
+
 
 body {
     font-family: 'Josefin Sans';
@@ -24,6 +47,11 @@ body {
   padding: 70px 0 70px;
   color: #white;
   background-size: cover;
+}
+
+#definition blockquote {
+  font-size: 26px;
+  border-left-color: #3F51B5;
 }
 
 #mapdiv {
@@ -56,15 +84,164 @@ body {
 
 .navbar-brand {
   font-size: 76px;
+  background: none;
+  text-transform: none;
+  border-radius: none;
+  box-shadow: none;
 }
 
-blockquote {
-  font-size: 26px;
-}
 
 .navbar {
   padding-bottom: 26px;
 }
+
+.navbar-nav a {
+  background: none; 
+  border-radius: none;
+  box-shadow: none; 
+}
+
+
+#date blockquote {
+  font-size: 16px;
+  padding: 20px;
+}
+
+.dropdown-menu {
+  background: white;
+  border: none ;
+  opacity: 0.9;
+}
+
+.dropdown-menu>li>a {
+  color: gray;
+}
+
+a:hover {
+  background: rgba(255, 255, 255, 0.0);
+}
+
+.carousel-control.left {
+  background-image: none;
+}
+
+.carousel-control.right {
+  background-image: none;
+}
+
+.date {
+  background-color: gray;
+}
+
+.timeline-img-header a {
+  display: block;
+  padding: 0;
+  margin-left: 0;
+}
+
+.timeline-img-header img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.month {
+  color: #3F51B5;
+}
+
+.glyphicon glyphicon-plane {
+  rotate: 90;
+}
+
+header {
+  background: none;
+  text-align: center;
+}
+
+.parallax {
+  background-image : url("../images/2017.jpg");
+  height:600px;
+  background-attachment: fixed;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size: cover;
+}
+
+.parallax h1{
+  background-color: gray;
+  opacity: 0.8;
+  position: relative;
+  width: 55%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  padding: 5px;
+}
+
+.countdown{
+  background-image: url("../images/kilimanjaro.jpg");
+  opacity: 0.9;
+  height:400px;
+  background-size: cover;
+}
+
+.countdown h1{
+  margin-top: 0px;
+  padding: 20px;
+  text-align: center;
+}
+
+#clockdiv{
+  font-family: 'Josefin Sans';
+  color: #fff;
+  display: inline-block;
+  font-weight: 100;
+  text-align: center;
+  font-size: 30px;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+
+#clockdiv > div{
+  padding: 10px;
+  border-radius: 3px;
+  background: #3F51B5;
+  display: inline-block;
+}
+
+#clockdiv div > span{
+  padding: 15px;
+  border-radius: 3px;
+  background: #9d9d9d;
+  display: inline-block;
+}
+
+.smalltext{
+  padding-top: 5px;
+  font-size: 16px;
+}
+
+footer {
+  text-align: center;
+  height: 25px;
+}
+
+.timeline-img-header a{
+  height: 100%;
+}
+
+#february {
+  text-align: right;
+}
+
+
+
+
 
 
 

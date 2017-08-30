@@ -239,7 +239,17 @@ footer {
   text-align: right;
 }
 
+#may {
+  text-align: right;
+}
 
+#july {
+  text-align: right;
+}
+
+.js--fadeInRight a {
+  margin-top: 0px;
+}
 
 
 
